@@ -13,6 +13,7 @@ render(
     <Switch>
       <Route exact path="/" component={Home}/>
       <Route path="/create" component={CreatePage} />
+      <Route path="/update/:id" component={CreatePage} />
       <Route path="*" render={() => <h1>Not found</h1>} />
     </Switch>
   </Router>

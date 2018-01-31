@@ -4,7 +4,8 @@ import {
   graphql
 } from 'react-relay';
 import DeletePostMutation from '../mutations/DeletePostMutation';
-import { withRouter } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
+
 
 class Post extends React.Component {
 
@@ -21,8 +22,13 @@ class Post extends React.Component {
         />
         <div className='pt3'>
           {this.props.post.description}&nbsp;
-          <span 
-            className='red f6 pointer dim' 
+          <span
+            className='red f6 pointer dim'
+            onClick={this._handleUpdate}
+          >Update</span>
+            <span className="h-spacer"/>
+          <span
+            className='red f6 pointer dim'
             onClick={this._handleDelete}
           >Delete</span>
         </div>
@@ -32,6 +38,11 @@ class Post extends React.Component {
 
   _handleDelete = () => {
     DeletePostMutation(this.props.post.id, this.props.viewer.id)
+  }
+  _handleUpdate = () => {
+      const post= this.props.post;
+      this.props.history.push(`/update/${this.props.post.id}`);
+     //<Redirect to={`/update/${post.id}`} params={post}/>
   }
 }
 
